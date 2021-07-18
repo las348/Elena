@@ -17,12 +17,12 @@
         {% form 'recover_customer_password' %}
             {% include 'form-error', form: form %}
 
-            <div class="col-12">
+            <div class="col-12 my-3">
                 <label for="resetPassword" class="form-label">Email Address</label>
                 <input class="form-control" type="email" name="email" id="resetPassword">
             </div>
 
-            <input type="submit" value="Reset Password" class="btn btn-secondary">
+            <input type="submit" value="Reset Password" class="btn btn-secondary my-2">
         {% endform %}
     </div>
 </div>
