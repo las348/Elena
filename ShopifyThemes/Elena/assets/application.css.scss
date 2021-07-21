@@ -1,6 +1,8 @@
 // Put your styles in this file.
 // Note: "@import" rules aren’t supported.
-html, body {}
+html,
+body {
+}
 
 .inner-hero-section {
     position: relative;
@@ -21,8 +23,27 @@ html, body {}
     z-index: -1;
 }
 
-.login-form, .forgot-password-form {
+.login-form,
+.forgot-password-form {
     width: 100%;
     max-width: 330px;
     margin: auto;
+}
+
+// Collection Page
+.grid-collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1px;
+    margin: 1em;
+    background-color: white;
+}
+
+.grid-product {
+    display: grid;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+    line-height: 1;
+    border-radius: 5px;
 }
