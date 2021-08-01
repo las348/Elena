@@ -1,0 +1,17 @@
+<h1>{{ collection.title }}</h1>
+<div class="grid-collection">
+  {% for product in collection.products %}
+  <div class="grid-product">
+    <a href="{{ product.url }}">
+      <img src="{{ product.featured_image.src | img_url: '300x' }}" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+    <!-- <a href="{{ product.url }}">{{ product.title }}</a>
+    <p>{{ product.price | money }}</p>
+    {% unless product.available %}<br><strong>sold out</strong>{% endunless %} -->
+    <div>
+      <h3><a href="{{ product.url }}">{{ product.title }}</h3>
+      <p>{{ product.price | money_without_trailing_zeros }}</p></a>
+    </div>
+  </div>
+  {% endfor %}
+</div>

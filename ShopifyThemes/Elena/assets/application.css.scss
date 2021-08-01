@@ -30,20 +30,47 @@ body {
     margin: auto;
 }
 
-// Collection Page
+// PRODUCT TILE SNIPPET
+.product-tile__image {
+    max-width: 100%;
+}
+
+.product-tile__info {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-tile__title {
+    font-size: 18px;
+}
+
+.product-tile__price {
+    font-size: 16px;
+}
+
+// COLLECTION TEMPLATE
+// .collection__grid {
+//     display: grid;
+//     grid-column-gap: 20px;
+//     grid-row-gap: 20px;
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//     margin-bottom: 100px;
+// }
+
 .grid-collection {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 1px;
     margin: 1em;
     background-color: white;
-}
-
-.grid-product {
+  }
+  
+  .grid-product {
     display: grid;
     justify-content: center;
     padding: 10px;
     color: white;
     line-height: 1;
     border-radius: 5px;
-}
+  }
