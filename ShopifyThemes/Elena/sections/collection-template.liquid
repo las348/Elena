@@ -1,17 +1,61 @@
-<h1>{{ collection.title }}</h1>
+<section class="inner-hero-section">
+  {% if section.settings.image != blank %}
+  <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt}}">
+  {% else %}
+  {% capture current %}{% cycle 1,2 %}{% endcapture %}
+  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
+</section>
+
+<h1 class="text-center">{{ collection.title }}</h1>
+
+<div class="row justify-content-center">
+  <select name="sorting" id="sort_by" class="form-select form-select-sm w-25">
+    {% for option in collection.sort_options %}
+      <option value="{{ option.value }}" 
+          {% if option.value == collection.sort_by %}
+            selected
+          {% endif %}
+      >{{ option.name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
 <div class="grid-collection">
+  {% paginate collection.products by 3 %}
   {% for product in collection.products %}
   <div class="grid-product">
     <a href="{{ product.url }}">
       <img src="{{ product.featured_image.src | img_url: '300x' }}" alt="{{ product.featured_image.alt | escape }}">
     </a>
-    <!-- <a href="{{ product.url }}">{{ product.title }}</a>
-    <p>{{ product.price | money }}</p>
-    {% unless product.available %}<br><strong>sold out</strong>{% endunless %} -->
     <div>
-      <h3><a href="{{ product.url }}">{{ product.title }}</h3>
+      <h4><a href="{{ product.url }}" class="collection__title">{{ product.title }}</h4>
       <p>{{ product.price | money_without_trailing_zeros }}</p></a>
     </div>
   </div>
   {% endfor %}
 </div>
+<div>
+    {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+  </div>
+
+{% schema %}
+{
+"name": "Hero",
+"class": "hero-section",
+"settings": [
+{
+"type": "image_picker",
+"id": "image",
+"label": "Heading Background Title"
+}
+],
+"presets": [
+{
+"category": "Hero",
+"name":"Simple Hero"
+}
+]
+}
+{% endschema %}
