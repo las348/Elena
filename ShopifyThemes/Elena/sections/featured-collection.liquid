@@ -1,26 +1,23 @@
-<section class="container py-4">
-    <h2 class="text-center my-3">{{ section.settings.title }}</h2>
-    <div class="row g-3 row-cols-md-3 row-cols-1">
+<section>
+    <h2 class="text-center my-5">{{ section.settings.title }}</h2>
+    <div class="grid-collection">
         {% for product in collections[section.settings.featured_collection].products %}
         {% assign image = product.featured_media.preview_image %}
-        <div class="col">
-            <div class="card">
-                {% if image != blank %}
-                <img class="card-img-top" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">
-                {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
-                {% endif %}
+        <div class="grid-product">
+            {% if image != blank %}
+            <img src="{{ image | img_url: '300x' }}" alt="{{ product.title }}">
+            {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+            {% endif %}
 
-                <div class="card-body">
-                    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-                    <p>{{ product.price | money_without_trailing_zeros }}</p>
-                </div>
-                
+            <div>
+                <h4><a href="{{ product.url }}" class="collection__title">{{ product.title }}</h4>
+                <p>{{ product.price | money_without_trailing_zeros }}</p></a>
             </div>
+
         </div>
         {% endfor %}
     </div>
-
 </section>
 
 
