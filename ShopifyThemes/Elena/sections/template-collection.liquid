@@ -1,0 +1,60 @@
+{% for block in section.blocks %}
+{% case block.type %}
+
+{% when 'collection_title' %}
+<h1 class="text-center">{{ collection.title }}</h1>
+
+{% when 'collection_sort' %}
+<div class="row justify-content-center">
+    <select name="sorting" id="sort_by" class="form-select form-select-sm w-25">
+        {% for option in collection.sort_options %}
+        <option value="{{ option.value }}" {% if option.value==collection.sort_by %} selected {% endif %}>{{ option.name
+            }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+{% else %}
+{% endcase %}
+{% endfor %}
+
+
+<div class="grid-collection">
+    {% paginate collection.products by 3 %}
+    {% for product in collection.products %}
+    <div class="grid-product">
+        <a href="{{ product.url }}">
+            <img src="{{ product.featured_image.src | img_url: '300x' }}"
+                alt="{{ product.featured_image.alt | escape }}">
+        </a>
+        <div>
+            <h4><a href="{{ product.url }}" class="collection__title">{{ product.title }}</h4>
+            <p>{{ product.price | money_without_trailing_zeros }}</p></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div>
+    {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+</div>
+
+
+{% schema %}
+{
+"name": "Template Collection",
+"tag": "section",
+"blocks": [
+{
+"type": "collection_title",
+"name": "Collection Title",
+"limit": 1
+},
+{
+"type": "collection_sort",
+"name": "Collection Sort",
+"limit": 1
+}
+]
+}
+{% endschema %}

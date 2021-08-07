@@ -1,0 +1,22 @@
+{
+    "sections": {
+        "template": {
+            "type": "template-collection",
+            "blocks": {
+                "collection_title": {
+                    "type": "collection_title"
+                },
+                "collection_sort": {
+                    "type": "collection_sort"
+                }
+            },
+            "block_order": [
+                "collection_title",
+                "collection_sort"
+            ]
+        }
+    },
+    "order": [
+        "template"
+    ]
+}
