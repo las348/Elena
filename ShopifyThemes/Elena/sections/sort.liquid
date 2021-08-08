@@ -1,0 +1,26 @@
+<section class="row justify-content-center">
+    <select name="sorting" id="sort_by" class="form-select form-select-sm w-25 my-5">
+        {% for option in collection.sort_options %}
+        <option value="{{ option.value }}" {% if option.value==collection.sort_by %} selected {% endif %}>{{ option.name
+            }}</option>
+        {% endfor %}
+    </select>
+</section>
+
+{% schema %}
+{
+"name": "Sort",
+"settings": [
+    {
+    "type": "select",
+    "id": "sort_position",
+    "label": "Sort position",
+    "options": [
+        {
+        "value": "center", "label": "center"
+        }
+    ]
+    }
+]
+}
+{% endschema %}

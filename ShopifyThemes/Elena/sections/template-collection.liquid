@@ -2,11 +2,11 @@
 {% case block.type %}
 
 {% when 'collection_title' %}
-<h1 class="text-center">{{ collection.title }}</h1>
+<h1 class="text-center my-2">{{ collection.title }}</h1>
 
 {% when 'collection_sort' %}
 <div class="row justify-content-center">
-    <select name="sorting" id="sort_by" class="form-select form-select-sm w-25">
+    <select name="sorting" id="sort_by" class="form-select form-select-sm w-25 my-5">
         {% for option in collection.sort_options %}
         <option value="{{ option.value }}" {% if option.value==collection.sort_by %} selected {% endif %}>{{ option.name
             }}</option>

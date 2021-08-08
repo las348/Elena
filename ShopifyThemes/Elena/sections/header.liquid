@@ -1,6 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">
+            {% if section.settings.logo_image != blank %}
+            <img src="{{ section.settings.logo_image | img_url: 'master' }}" alt="">
+            {% else %}
+           Navbar
+            {% endif %}
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,3 +73,16 @@
     <div class="offcanvas-body" id="search_results_body">
     </div>
 </div>
+
+{% schema %}
+{
+    "name": "Logo",
+    "settings": [
+    {
+         "type": "image_picker",
+         "id": "logo_image",
+         "label": "Logo Image"
+    }
+    ]
+}
+{% endschema %}
