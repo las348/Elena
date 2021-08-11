@@ -1,65 +1,111 @@
 <section class="inner-hero-section">
-    {% if section.settings.image != blank %}
-    <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt}}">
-    {% else %}
-    {% capture current %}{% cycle 1,2 %}{% endcapture %}
-    {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-    {% endif %}
+  {% if section.settings.image != blank %}
+  <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt}}">
+  {% else %}
+  {% assign placeholder = 'lifestyle-2' %}
+  {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
 
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mx-auto hero-text">
-                {% for block in section.blocks %}
-                {% case block.type %}
-                {% when 'title' %}
-                <h1>{{ section.settings.title }}</h1>
+  <div class="container py-5">
+      <div class="row">
+          <div class="col-lg-4 col-md-6 mx-auto hero-text">
+              {% for block in section.blocks %}
+              {% case block.type %}
+              {% when 'title' %}
+              <h1>{{ block.settings.title | escape }}</h1>
 
-                {% when 'hero_text' %}
-                {{ section.settings.hero_text }}
+              {% when 'hero_description' %}
+              {{ block.settings.hero_description | escape }}
 
-                {% when 'button_label' %}
-                {% if section.settings.button_link != blank %}
-                <a href="{{ section.settings.button_link }}" class="btn btn-secondary">{{ section.settings.button_label
-                    }}</a>
-                {% else %}
-                {% endif %}
+              {% when 'button_label' %}
+              {% if block.settings.button_link != blank %}
+              <a href="{{ block.settings.button_link }}" class="btn btn-secondary">{{ section.settings.button_label
+                  }}</a>
+              {% else %}
+              {% endif %}
 
-                {% else %}
-                {% endcase %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+              {% else %}
+              {% endcase %}
+              {% endfor %}
+          </div>
+      </div>
+  </div>
 
 </section>
 
 {% schema %}
 {
-"name": "Hero",
+"name": "hero",
+"tag": "section",
 "class": "hero-section",
 "settings": [
   {
     "type": "image_picker",
     "id": "image",
-    "label": "Image Label"
+    "label": "Image Picker"
   }
 ], 
 "blocks": [
+  {
+  "type": "title",
+  "name": "Hero Header",
+  "limit": 1,
+  "settings": [
     {
-    "type": "title",
-    "name": "Title",
-    "limit": 1
-    },
-    {
-    "type": "hero_text",
-    "name": "Hero Text",
-    "limit": 1
-    },
-    {
-    "type": "button_label",
-    "name": "Button Label",
-    "limit": 1
+      "type": "text",
+      "id": "heading",
+      "default": "Hero Title",
+      "label": "Enter heading here"
     }
+  ]
+  },
+  {
+  "type": "hero_description",
+  "name": "Hero Text",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Hero Description",
+      "label": "Enter description text here"
+    }
+  ]
+  },
+  {
+  "type": "button_label",
+  "name": "Button Label",
+  "limit": 1,
+  "settings": [
+  {
+    "type": "text",
+    "id": "button_label",
+    "default": "Button Label",
+    "label": "Button Label"
+  },
+  {
+    "type": "url",
+    "id": "button_link",
+    "label": "Button Link"
+  }
+  ]
+  }
+],
+"presets": [
+{
+  "name": "presets",
+  "blocks": [
+    {
+      "type": "title"
+    },
+    {
+      "type": "hero_description"
+    },
+    {
+      "type": "button_label"
+    }
+  ]
+}
 ]
 }
 {% endschema %}
