@@ -1,37 +1,39 @@
 <div class="inner-hero-section">
-    {% if section.settings.image != blank %}
-    <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt}}">
-    {% else %}
-    {% assign placeholder = 'lifestyle-2' %}
-    {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
-    {% endif %}
+  {% if section.settings.image != blank %}
+  <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt}}">
+  {% else %}
+  {% assign placeholder = 'lifestyle-2' %}
+  {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
 
-    <div class="container py-5">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mx-auto hero-{{ section.settings.color_scheme }}">
-          {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when 'heading' -%}
-              <h1>{{ block.settings.heading }}</h1>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mx-auto hero-{{ section.settings.color_scheme }}">
+        {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        {%- when 'heading' -%}
+        <h1>{{ block.settings.heading }}</h1>
 
-              {%- when 'text' -%}
-                <div class="">
-                  {{ block.settings.text | escape }}
-                </div>
-
-              {%- when 'buttons' -%}
-                {%- if block.settings.button_label != blank -%}
-                  <a href="{{ block.settings.button_link }}" class="btn hero-{{ block.settings.btn_color_scheme }}">
-                    {{ block.settings.button_label }}
-                  </a>
-                {%- endif -%}
-              </div>
-            {%- endcase -%}
-          {%- endfor -%}
+        {%- when 'text' -%}
+        <div class="">
+          {{ block.settings.text | escape }}
         </div>
+
+        {%- when 'buttons' -%}
+        {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+        <a href="{{ block.settings.button_link }}" class="btn hero-{{ block.settings.btn_color_scheme }}">
+          {{ block.settings.button_label | escape }}
+        </a>
+        {% else %}
+        {%- endif -%}
+
       </div>
+      {%- endcase -%}
+      {%- endfor -%}
     </div>
+  </div>
 </div>
+
 
 
 {% schema %}
