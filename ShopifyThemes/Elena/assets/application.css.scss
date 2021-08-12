@@ -19,14 +19,30 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
-    z-index: -1;
+    object-position: bottom;
 }
 
-.hero-text {
+.hero-wht-bckgrnd {
     background-color: white;
     opacity: .9;
     padding: 20px;
+}
+
+.hero-blk-bckgrnd {
+    background-color: black;
+    color: white;
+    opacity: .9;
+    padding: 20px;
+}
+
+.hero-pnk-bckgrnd {
+    background-color: deeppink;
+    margin-top: 20px;
+}
+
+.hero-turq-bckgrnd {
+    background-color: darkturquoise;
+    margin-top: 20px;
 }
 
 .login-form,

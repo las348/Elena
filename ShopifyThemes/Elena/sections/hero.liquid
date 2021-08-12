@@ -8,7 +8,7 @@
 
     <div class="container py-5">
       <div class="row">
-        <div class="col-lg-4 col-md-6 mx-auto hero-text">
+        <div class="col-lg-4 col-md-6 mx-auto hero-{{ section.settings.color_scheme }}">
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'heading' -%}
@@ -21,12 +21,11 @@
 
               {%- when 'buttons' -%}
                 {%- if block.settings.button_label != blank -%}
-                  <a href="{{ block.settings.button_link }}" class="btn btn-secondary">
+                  <a href="{{ block.settings.button_link }}" class="btn hero-{{ block.settings.btn_color_scheme }}">
                     {{ block.settings.button_label }}
                   </a>
                 {%- endif -%}
               </div>
-
             {%- endcase -%}
           {%- endfor -%}
         </div>
@@ -45,6 +44,22 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image Picker"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+      {
+        "value": "wht-bckgrnd",
+        "label": "White Background"
+      },
+      {
+        "value": "blk-bckgrnd",
+        "label": "Black Background"
+      }
+      ],
+      "default": "wht-bckgrnd",
+      "label": "Color Scheme"
     }
   ],
   "blocks": [
@@ -82,13 +97,29 @@
         {
           "type": "text",
           "id": "button_label",
-          "default": "Button Label",
-          "label": "button_label"
+          "default": "Shop",
+          "label": "Button Label"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "button_link"
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "btn_color_scheme",
+          "options": [
+          {
+            "value": "pnk-bckgrnd",
+            "label": "Pink Background"
+          },
+          {
+            "value": "turq-bckgrnd",
+            "label": "Turquoise Background"
+          }
+          ],
+          "default": "turq-bckgrnd",
+          "label": "Button Color"
         }
       ]
     }
