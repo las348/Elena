@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'hover.css' | asset_url }}">
+
 <section>
     <h2 class="text-center my-5">{{ section.settings.title }}</h2>
     <div class="grid-collection">
@@ -5,7 +7,10 @@
         {% assign image = product.featured_media.preview_image %}
         <div class="grid-product">
             {% if image != blank %}
-            <img src="{{ image | img_url: '300x' }}" alt="{{ product.title }}">
+            <div class="reveal">
+                <img src="{{ image | img_url: '300x' }}" alt="{{ product.title }}">
+                <img class="hidden" src="{{ product.images.last | img_url: '450x450' }}" alt="{{ product.images.last.alt | escape }}" />
+            </div>
             {% else %}
             {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
             {% endif %}
@@ -37,7 +42,6 @@
 "default": "Featured Collection",
 "label": "Title"
 }
-
 ],
 "presets": [
 {
