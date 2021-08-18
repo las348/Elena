@@ -1,0 +1,161 @@
+<link rel="stylesheet" href="{{ 'image-text.css' | asset_url }}">
+
+<div class="grid__image-with-text">
+    <div class="Image">
+        {%-if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | img_url: '500x' }}" alt="{{ section.settings.image.alt | escape }}">
+        {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+    </div>
+
+
+    <div class="Content">
+        {%- for block in section.blocks -%}
+        {% case block.type %}
+        {%- when 'heading' -%}
+        <div class="Heading">
+        <h2>{{ block.settings.heading | escape }}</h2>
+        </div>
+
+        {% when 'text' %}
+        <div class="Text">{{ block.settings.text }}</div>
+
+        {% when 'button' %}
+        {%- if block.settings.button_label_1 != blank -%}
+        <div class="Button1">
+        <a href="{{ block.settings.button_link_1}}" class="btn btn-primary">
+            {{ block.settings.button_label_1 | escape }}
+        </a>
+        </div>
+
+        {% endif %}
+        {% else %}
+        {% endcase %}
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "image-text",
+  "tag": "section",
+  "class": "image-text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "background-1",
+          "label": "White"
+        },
+        {
+          "value": "background-2",
+          "label": "Black"
+        },
+        {
+          "value": "accent-1",
+          "label": "Pop"
+        }
+      ],
+      "default": "background-1",
+      "label": "White Background"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image on Left"
+        },
+        {
+          "value": "text_first",
+          "label": "Image on Right"
+        }
+      ],
+      "default": "image_first",
+      "label": "Image on Left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Image with text",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "Button 1"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Button Link 1"
+        },
+        {
+            "type": "text",
+            "id": "button_label_2",
+            "default": "Button label",
+            "label": "Button 2"
+        },
+        {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "Button Link 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

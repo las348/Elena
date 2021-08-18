@@ -5,7 +5,10 @@
         },
         "featured-collection": {
             "type": "featured-collection"
+        },
+        "image-text": {
+            "type": "image-text"
         }
     },
-    "order": ["hero", "featured-collection"]
+    "order": ["hero", "featured-collection", "image-text"]
 }
