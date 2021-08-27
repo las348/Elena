@@ -1,51 +1,80 @@
 <link rel="stylesheet" href="{{ 'image-text.css' | asset_url }}">
 
-<div class="grid__image-with-text">
-    <div class="Image">
-        {%-if section.settings.image != blank -%}
-        <img src="{{ section.settings.image | img_url: '500x' }}" alt="{{ section.settings.image.alt | escape }}">
+<div class="image-with-text {% if section.settings.full_width %}image-with-text--full-width{% else %}page-width{% endif %} color-scheme-{{ section.settings.color_scheme }}">
+  <div class="image-with-text__grid color-{{ section.settings.color_scheme }}{% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %} grid grid--gapless grid--1-col grid--2-col-tablet">
+    <div class="grid__item">
+      <div class="image-with-text__media image-with-text__media--{{ section.settings.height }} {% if section.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}"
+        {% if section.settings.height == 'adapt' and section.settings.image != blank %} style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;"{% endif %}
+      >
+        {%- if section.settings.image != blank -%}
+          <img srcset="{%- if section.settings.image.width >= 165 -%}{{ section.settings.image | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if section.settings.image.width >= 360 -%}{{ section.settings.image | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if section.settings.image.width >= 535 -%}{{ section.settings.image | img_url: '535x' }} 535w,{%- endif -%}
+            {%- if section.settings.image.width >= 720 -%}{{ section.settings.image | img_url: '720x' }} 720w,{%- endif -%}
+            {%- if section.settings.image.width >= 940 -%}{{ section.settings.image | img_url: '940x' }} 940w,{%- endif -%}
+            {%- if section.settings.image.width >= 1070 -%}{{ section.settings.image | img_url: '1070x' }} 1070w{%- endif -%}"
+            src="{{ section.settings.image | img_url: '533x' }}"
+            sizes="(min-width: 1100px) 535px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
         {%- else -%}
-        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-        {% endif %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
     </div>
-
-
-    <div class="Content">
+    <div class="grid__item">
+      <div class="image-with-text__content image-with-text__content--{{ section.settings.height }}">
         {%- for block in section.blocks -%}
-        {% case block.type %}
-        {%- when 'heading' -%}
-        <div class="Heading">
-        <h2>{{ block.settings.heading | escape }}</h2>
-        </div>
-
-        {% when 'text' %}
-        <div class="Text">{{ block.settings.text }}</div>
-
-        {% when 'button' %}
-        {%- if block.settings.button_label_1 != blank -%}
-        <div class="Button1">
-        <a href="{{ block.settings.button_link_1}}" class="btn btn-primary">
-            {{ block.settings.button_label_1 | escape }}
-        </a>
-        </div>
-
-        {% endif %}
-        {% else %}
-        {% endcase %}
-        {% endfor %}
+          {% case block.type %}
+            {%- when 'heading' -%}
+              <h2 class="image-with-text__heading h1">
+                {{ block.settings.heading | escape }}
+              </h2>
+            {%- when 'text' -%}
+              <div class="image-with-text__text rte">{{ block.settings.text }}</div>
+            {%- when 'button' -%}
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link }}" class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label | escape }}</a>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
     </div>
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "image-text",
-  "tag": "section",
-  "class": "image-text",
+  "class": "spaced-section spaced-section--full-width",
   "settings": [
     {
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "options__1"
+        },
+        {
+          "value": "small",
+          "label": "options__2"
+        },
+        {
+          "value": "large",
+          "label": "options__3"
+        }
+      ],
+      "default": "adapt",
+      "label": "height"
     },
     {
       "type": "select",

@@ -1,0 +1,48 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h1>{{ page.title }}</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    {% form 'contact' %}
+    {% if form.posted_successfully? %}
+    <div class="alert alert-success">
+      Thank you for your contact
+    </div>
+    {% endif %}
+
+    {{ form.errors | default_errors }}
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <label for="ContactFormName">Name</label>
+        <input class="form-control" type="text" id="ContactFormName" name="contact[name]">
+      </div>
+      <div class="col-12 col-md-6">
+        <label for="ContactFormEmail">Email</label>
+        <input class="form-control" type="email" id="ContactFormEmail" name="contact[email]">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <label for="ContactOrderNumber">Order #</label>
+        <input type="text" name="contact[order_number]" id="ContactFormOrderNumber" class="form-control">
+      </div>
+      <div class="col-12 col-md-6">
+        <label for="ContactFormPhone">Phone #</label>
+        <input class="form-control" type="tel" id="ContactFormPhone" name="contact[phone]">
+      </div>
+    </div>
+
+    <div class="col-12">
+      <label for="ContactFormMessage">Message</label>
+      <textarea class="form-control" rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
+    </div>
+
+    <input class="btn btn-success w-100 mt-2" type="submit" value="send">
+    {% endform %}
+  </div>
+</div>
