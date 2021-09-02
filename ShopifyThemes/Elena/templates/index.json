@@ -8,7 +8,10 @@
         },
         "image-text": {
             "type": "image-text"
+        },
+        "newsletter": {
+            "type": "newsletter"
         }
     },
-    "order": ["hero", "featured-collection", "image-text"]
+    "order": ["hero", "featured-collection", "image-text", "newsletter"]
 }

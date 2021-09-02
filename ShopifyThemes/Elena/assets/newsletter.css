@@ -1,0 +1,30 @@
+.color-accent-1 {
+    background-color: deeppink;
+}
+
+.color-accent-2 {
+    background-color: darkturquoise;
+}
+
+.color-background-1 {
+    background-color: white;
+}
+
+.color-background-2 {
+    background-color: lightgray;
+}
+
+.color-inverse {
+    background-color: black;
+    color: white;
+}
+
+.newsletter__wrapper {
+    margin: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.btn-newsletter {
+ margin-top: 10px;
+}
