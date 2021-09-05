@@ -1,0 +1,48 @@
+.quick_links {
+    font-size: 11px;
+}
+
+#links_title {
+    font-size: 12px;
+}
+
+.footer_copyright {
+    text-align: center;
+}
+
+.copyright__content {
+    text-decoration: none;
+    color: black;
+}
+
+.payment_types {
+    margin-top: 1rem;
+}
+
+.list-social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+@media only screen and (max-width: 749px) {
+    .list-social {
+        justify-content: center;
+    }
+}
+
+.list-social__item .icon {
+    height: 1.8rem;
+    width: 1.8rem;
+    color: black;
+}
+
+.list-social__link {
+    align-items: center;
+    display: flex;
+    padding: 1.3rem;
+}
+
+.list-social__link:hover .icon {
+    transform: scale(1.07);
+}

@@ -1,38 +1,98 @@
+<link rel="stylesheet" href="{{ 'footer.css' | asset_url }}">
+
 <footer class="footer-section bg-light py-5 mt-5">
-    <div class="container p-4">
-        <div class="row row-cols-1 row-cols-md-{{ section.settings.col_num }}">
+    <div class="container p-4 footer_wrapper">
+        <div class="row row-cols-1 row-cols-md-{{ section.settings.col_num }} justify-content-center">
             {% for block in section.blocks %}
-                {% assign item = block.settings %}
-                {% if block.type == "link_list" %}
-                    <div class="col">
-                        <h5>{{ item.title }}</h5>
-                        {% assign footer_linklist = item.menu %}
-                        <ul class="list-unstyled text-small">
-                            {% for link in linklists[footer_linklist].links %}
-                                <li>
-                                    <a href="{{ link.url }}">{{ link.title | escape }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% else if block.type == "text" %}
-                    <div class="col">
-                        <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5">
-                        <h5>{{ item.title }}</h5>
-                        <p>{{ item.description }}</p>
-                    </div>
-                {% endif %}
+            {% assign item = block.settings %}
+            {% if block.type == "link_list" %}
+            <div class="col">
+                <p id="links_title">{{ item.title }}</p>
+                {% assign footer_linklist = item.menu %}
+                <ul class="list-unstyled text-small quick_links">
+                    {% for link in linklists[footer_linklist].links %}
+                    <li>
+                        <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else if block.type == "text" %}
+            <div class="col">
+                <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5">
+                <h5>{{ item.title }}</h5>
+                <p>{{ item.description }}</p>
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
+
+    {%- if section.settings.show_social -%}
+    <ul class="footer__list-social list-unstyled list-social justify-content-center" role="list">
+        {%- if settings.social_twitter_link != blank -%}
+        <li class="list-social__item">
+            <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link"
+                aria-describedby="a11y-external-message">
+                {%- render 'icon-twitter' -%}
+                <span class="visually-hidden">{{ general.social.links.twitter }}</span>
+            </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}
+        <li class="list-social__item">
+            <a href="{{ settings.social_facebook_link }}" class="link link--text list-social__link"
+                aria-describedby="a11y-external-message">
+                {%- render 'icon-facebook' -%}
+                <span class="visually-hidden">{{ general.social.links.facebook }}</span>
+            </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}
+        <li class="list-social__item">
+            <a href="{{ settings.social_instagram_link }}" class="link link--text list-social__link"
+                aria-describedby="a11y-external-message">
+                {%- render 'icon-instagram' -%}
+                <span class="visually-hidden">{{ general.social.links.instagram }}</span>
+            </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}
+        <li class="list-social__item">
+            <a href="{{ settings.social_tiktok_link }}" class="link link--text list-social__link"
+                aria-describedby="a11y-external-message">
+                {%- render 'icon-tiktok' -%}
+                <span class="visually-hidden">{{ general.social.links.tiktok }}</span>
+            </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}
+        <li class="list-social__item">
+            <a href="{{ settings.social_youtube_link }}" class="link link--text list-social__link"
+                aria-describedby="a11y-external-message">
+                {%- render 'icon-youtube' -%}
+                <span class="visually-hidden">{{ general.social.links.youtube }}</span>
+            </a>
+        </li>
+        {%- endif -%}
+        <li class="list-social__item--placeholder">{{ sections.footer.social_placeholder }}</li>
+    </ul>
+    {%- endif -%}
+
+    <hr>
+
+    <div class="footer_copyright">
+        <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}</small>
+        <small class="copyright__content">{{ powered_by_link }}</small>
     {% if section.settings.enable_payment_type_icons %}
-        <div class="container justify-content-center d-flex">
-            {% for payment_type in shop.enabled_payment_types %}
-                <img src="{{ payment_type | payment_type_img_url }}">
-            {% endfor %}
-        </div>
+    <div class="payment_types">
+        {% for payment_type in shop.enabled_payment_types %}
+        <img src="{{ payment_type | payment_type_img_url }}">
+        {% endfor %}
+    </div>
     {% endif %}
-    
+    </div>
+
 </footer>
 
 {{ 'bootstrap.min.js' | asset_url | script_tag }}
@@ -45,7 +105,7 @@
         {
             "type": "range",
             "id": "col_num",
-            "default": 3,
+            "default": 2,
             "min": 2,
             "max": 4,
             "label": "Number of Columns"
@@ -55,6 +115,12 @@
             "id": "enable_payment_type_icons",
             "label": "Enable Payment Type Icons",
             "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_social",
+            "default": false,
+            "label": "Enable Social Media Icons"
         }
     ],
     "max_blocks": 4,
