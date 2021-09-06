@@ -20,8 +20,8 @@
                 </ul>
             </div>
             {% else if block.type == "text" %}
-            <div class="col">
-                <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5 footer-logo">
+            <div class="col footer-logo">
+                <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5">
                 <h5>{{ item.title }}</h5>
                 <p>{{ item.description }}</p>
             </div>
