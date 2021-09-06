@@ -1,3 +1,15 @@
+.footer-section {
+    padding: 20px 0 30px 0;
+}
+
+.footer-logo {
+    text-align: right;
+}
+
+.footer_links {
+    text-align: left;
+}
+
 .quick_links {
     font-size: 11px;
 }

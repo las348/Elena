@@ -1,13 +1,15 @@
 <link rel="stylesheet" href="{{ 'footer.css' | asset_url }}">
 
-<footer class="footer-section bg-light py-5 mt-5">
+<footer class="footer-section bg-light">
     <div class="container p-4 footer_wrapper">
-        <div class="row row-cols-1 row-cols-md-{{ section.settings.col_num }} justify-content-center">
+        <div class="row row-cols-2 row-cols-md-{{ section.settings.col_num }} justify-content-center">
             {% for block in section.blocks %}
             {% assign item = block.settings %}
             {% if block.type == "link_list" %}
-            <div class="col">
+            <div class="col footer_links">
+                {% if block.item.title != blank %}
                 <p id="links_title">{{ item.title }}</p>
+                {% endif %}
                 {% assign footer_linklist = item.menu %}
                 <ul class="list-unstyled text-small quick_links">
                     {% for link in linklists[footer_linklist].links %}
@@ -19,7 +21,7 @@
             </div>
             {% else if block.type == "text" %}
             <div class="col">
-                <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5">
+                <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5 footer-logo">
                 <h5>{{ item.title }}</h5>
                 <p>{{ item.description }}</p>
             </div>
