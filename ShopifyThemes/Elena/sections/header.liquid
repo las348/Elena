@@ -2,9 +2,11 @@
     <div class="container">
         <a class="navbar-brand" href="#">
             {% if section.settings.logo_image != blank %}
-            <img src="{{ section.settings.logo_image | img_url: 'master' }}" alt="">
+            <a class="nav-link" href="{{ routes.root_url }}">
+                <img src="{{ section.settings.logo_image | img_url: 'master' }}">
+            </a>
             {% else %}
-           Navbar
+            Navbar
             {% endif %}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -13,7 +15,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                {% for link in linklists.main-menu.links %}
+                {% for link in linklists.main-menu.links offset:1 %}
                 {% assign child_list_handle = link.title | handleize %}
                 {% if linklists[child_list_handle].links != blank %}
                 <li class="nav-item">
@@ -47,7 +49,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ routes.account_login_url }}">Login</a>
+                    <a class="nav-link" href="{{ routes.account_login_url }}"><i class="fas fa-sign-in-alt"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ routes.account_register_url }}">Register</a>
@@ -76,13 +78,13 @@
 
 {% schema %}
 {
-    "name": "Logo",
-    "settings": [
-    {
-         "type": "image_picker",
-         "id": "logo_image",
-         "label": "Logo Image"
-    }
-    ]
+"name": "Logo",
+"settings": [
+{
+"type": "image_picker",
+"id": "logo_image",
+"label": "Logo Image"
+}
+]
 }
 {% endschema %}

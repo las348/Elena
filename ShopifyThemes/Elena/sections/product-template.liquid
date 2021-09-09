@@ -6,7 +6,7 @@
     <div class="col-md-6 col-12">
       <img class="img-fluid" src="{{ product_image | img_url: 'large' }}" alt="{{ product_image.alt }}"
         id="ProductMainImage">
-      {% for image in product.images %}
+      {% for image in product.images offset:1 %}
       <img src="{{ image.src | img_url: 'medium' }}" alt="{{ image.alt }}">
       {% endfor %}
     </div>
