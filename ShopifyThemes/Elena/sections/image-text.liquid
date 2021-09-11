@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ 'image-text.css' | asset_url }}">
 
-<div class="image-with-text">
+<div class="image-with-text {% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %} ">
     <div class="image-with-text__image">
         {%-if section.settings.image != blank -%}
         <img src="{{ section.settings.image | img_url: '533x' }}" 
