@@ -3,7 +3,7 @@
 <div class="image-with-text">
     <div class="image-with-text__image">
         {%-if section.settings.image != blank -%}
-        <img src="{{ section.settings.image | img_url: '533x533' }}" 
+        <img src="{{ section.settings.image | img_url: '533x' }}" 
           alt="{{ section.settings.image.alt | escape }}" 
           loading="lazy"
         >
@@ -12,7 +12,7 @@
         {% endif %}
     </div>
 
-    <div class="image-with-text__text">
+    <div class="image-with-text__text iwt_{{ section.settings.color_scheme }}">
         {%- for block in section.blocks -%}
         {% case block.type %}
         {%- when 'heading' -%}

@@ -1,27 +1,52 @@
 @media screen and (min-width: 750px) {
   .image-with-text {
     display: flex;
-    height: 30rem;
+    overflow: hidden;
     justify-content: center;
-    align-items: center;
+    height: auto;
   }
 
   .image-with-text__image {
-    max-width: 100%;
+    width: 30rem;
     height: auto;
-    margin: 10px;
   }
 
   .image-with-text__text {
     width: 30rem;
-    margin: 10px;
+    height: auto;
   }
 }
 
+.image-with-text {
+  max-width: 100%;
+  height: auto;
+}
+
 .image-with-text__image {
-  margin-top: 2rem;
+  overflow: hidden;
 }
 
 .image-with-text__text {
-  margin: 1rem 1rem;
+  padding: 10rem 2rem;
+}
+
+@media screen and (max-width: 750px) {
+  .image-with-text__text {
+    padding: 1rem 1rem;
+  }
+}
+
+.iwt_background-1 {
+  background-color: white;
+  color: black;
+}
+
+.iwt_background-2 {
+  background-color: black;
+  color: white;
+}
+
+.iwt_accent-1 {
+  background-color: deeppink;
+  color: black;
 }
