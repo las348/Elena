@@ -8,7 +8,7 @@
 
   <div class="container py-5">
     <div class="row">
-      <div class="col-lg-4 col-md-6 mx-auto hero-{{ section.settings.color_scheme }}">
+      <div class="col-lg-4 col-md-6 hero-{{ section.settings.color_scheme }} hero-{{ section.settings.position_textbox }}">
         {%- for block in section.blocks -%}
         {%- case block.type -%}
         {%- when 'heading' -%}
@@ -62,6 +62,26 @@
       ],
       "default": "wht-bckgrnd",
       "label": "Color Scheme"
+    },
+    {
+      "type": "select",
+      "id": "position_textbox",
+      "options": [
+      {
+        "value": "position_left",
+        "label": "Left"
+      },
+      {
+        "value": "position_right",
+        "label": "Right"
+      },
+      {
+        "value": "position_center",
+        "label": "Center"
+      }
+      ],
+      "default": "position_right",
+      "label": "Position Textbox"
     }
   ],
   "blocks": [

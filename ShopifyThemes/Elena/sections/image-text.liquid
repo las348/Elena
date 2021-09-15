@@ -25,13 +25,18 @@
 
         {% when 'button' %}
         {%- if block.settings.button_label_1 != blank -%}
-        <div class="button1">
+        <div class="">
         <a href="{{ block.settings.button_link_1}}" class="btn btn-primary">
             {{ block.settings.button_label_1 | escape }}
         </a>
+        <!-- {%- if block.settings.button_label_2 != blank -%}
+        <a href="{{ block.settings.button_link_2}}" class="btn btn-secondary button_label2">
+            {{ block.settings.button_label_2 | escape }}
+        </a>
         </div>
-
+        {% endif %} -->
         {% endif %}
+
         {% else %}
         {% endcase %}
         {% endfor %}

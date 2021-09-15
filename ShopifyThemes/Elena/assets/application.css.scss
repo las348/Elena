@@ -49,31 +49,27 @@ body {
     margin-top: 20px;
 }
 
+.hero-position_left {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.hero-position_right {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.hero-position_center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .login-form,
 .forgot-password-form {
     width: 100%;
     max-width: 330px;
     margin: auto;
 }
-
-// PRODUCT TILE SNIPPET
-// .product-tile__image {
-//     max-width: 100%;
-// }
-
-// .product-tile__info {
-//     align-items: center;
-//     display: flex;
-//     justify-content: space-between;
-// }
-
-// .product-tile__title {
-//     font-size: 18px;
-// }
-
-// .product-tile__price {
-//     font-size: 16px;
-// }
 
 // COLLECTION TEMPLATE
 // .collection__grid {
